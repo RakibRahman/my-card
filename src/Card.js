@@ -10,6 +10,7 @@ export const Card = ({ title, description, bgColor }) => {
       onClick={() => console.log("card clicked")}
     >
       <Box
+        boxShadow="25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f"
         bg={bgColor}
         width="300px"
         p="3"
