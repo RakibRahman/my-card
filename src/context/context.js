@@ -8,6 +8,7 @@ export function useData() {
 
 const initState = {
   card: [],
+  formState: {},
 };
 const reducer = (state, action) => {
   switch (action.type) {

@@ -7,7 +7,13 @@ export const Card = ({ title, description, bgColor }) => {
       flexDirection="column"
       justify="center"
       align="center"
-      onClick={() => console.log("card clicked")}
+      onClick={() =>
+        console.log({
+          title: title,
+          description: description,
+          bgColor: bgColor,
+        })
+      }
     >
       <Box
         boxShadow="25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f"
