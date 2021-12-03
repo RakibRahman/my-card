@@ -1,14 +1,11 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import { MdAddCircle } from "react-icons/md";
-import { useData } from "./context/context";
 
-export const AddButton = () => {
-  const { dispatch } = useData();
-
+export const AddButton = ({ onClick }) => {
   return (
     <Button
-      onClick={() => dispatch({ type: "add_card" })}
+      onClick={onClick}
       bg="#3a79ba"
       color="#f5f5f5"
       _hover={{

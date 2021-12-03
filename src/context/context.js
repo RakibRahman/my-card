@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-
+import { nanoid } from "nanoid";
 const DataContext = createContext();
 
 export function useData() {
@@ -8,21 +8,27 @@ export function useData() {
 
 const initState = {
   card: [],
-  formState: {},
+  selectedCard: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
     case "add_card": {
       const info = {
+        id: nanoid(),
         title: "demo",
         description: "lorem ipsum dolor sit",
       };
-      return {
-        card: [...state.card, info],
-      };
+      return { ...state, card: [...state.card, info] };
+    }
+    case "get_card_info": {
+      const data = action.payload;
+      return { ...state, selectedCard: Object.assign({}, data) };
+    }
+    case "add_new_card": {
+      return {};
     }
     default:
-      throw new Error();
+      return state;
   }
 };
 

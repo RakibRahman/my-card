@@ -5,16 +5,22 @@ import { useData } from "./context/context";
 import { Card } from "./Card";
 import { AddButton } from "./Button";
 export const AddCard = () => {
-  const { state } = useData();
-  React.useEffect(() => {
-    console.log(state);
-  }, [state]);
+  const { state, dispatch } = useData();
+
   return (
     <Flex flexDirection="column" w="400px" mx="auto" align="center" gridGap="3">
-      <AddButton />
-      <Flex flexDirection="column" gridGap="3" w="100%" color="#f5f5f5">
-        {state.card.map((card, index) => (
+      <AddButton onClick={() => dispatch({ type: "add_card" })} />
+
+      <Flex
+        flexDirection="column"
+        gridGap="3"
+        w="100%"
+        color="#f5f5f5"
+        border="1px solid red"
+      >
+        {state.card?.map((card, index) => (
           <Card
+            onClick={() => dispatch({ type: "get_card_info", payload: card })}
             key={index}
             title={card.title}
             description={card.description}
