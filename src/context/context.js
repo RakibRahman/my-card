@@ -25,7 +25,43 @@ const reducer = (state, action) => {
       return { ...state, selectedCard: Object.assign({}, data) };
     }
     case "add_new_card": {
-      return {};
+      const selectedIndex = action.payload;
+      const addAfter = (array, index, newItem) => {
+        return [...array.slice(0, index), newItem, ...array.slice(index)];
+      };
+      const newArray = addAfter(state.card, selectedIndex + 1, {
+        id: nanoid(),
+        title: "demo",
+        description: "lorem ipsum dolor sit",
+      });
+      return {
+        ...state,
+        card: newArray,
+      };
+    }
+    case "update_card": {
+      const newCard = state.card.map((card) =>
+        card.id === action.payload.id
+          ? {
+              ...card,
+              title: action.payload.title,
+              description: action.payload.description,
+            }
+          : card
+      );
+
+      return {
+        ...state,
+        card: newCard,
+      };
+
+      // return {
+      //   ...state,
+      //   card: [
+      //     ...state.card.filter((el) => el.id !== action.payload.id),
+      //     action.payload,
+      //   ],
+      // };
     }
     default:
       return state;

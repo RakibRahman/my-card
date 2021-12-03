@@ -3,13 +3,14 @@ import { Box, Text, Flex, Heading } from "@chakra-ui/react";
 import { AddButton } from "./Button";
 import { useData } from "./context/context";
 export const Card = ({ title, description, bgColor, onClick }) => {
-  const { dispatch } = useData();
+  const { state, dispatch } = useData();
   return (
     <Flex
       flexDirection="column"
       justify="center"
       align="center"
       onClick={onClick}
+      // className="animate__animated animate__backInLeft"
     >
       <Box
         boxShadow="25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f"
@@ -28,7 +29,6 @@ export const Card = ({ title, description, bgColor, onClick }) => {
           <Box bg="green" w="6" h="6" borderRadius="50%"></Box>
         </Flex>
       </Box>
-      <AddButton onClick={() => dispatch({ type: "add_card" })} />
     </Flex>
   );
 };
