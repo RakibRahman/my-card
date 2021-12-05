@@ -6,7 +6,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Button,
 } from "@chakra-ui/react";
 import { useData } from "./context/context";
 export const EditCard = () => {
@@ -14,39 +13,26 @@ export const EditCard = () => {
 
   const [value, setValue] = useState("1");
 
-  const [formState, setFormState] = useState({
-    id: state.selectedCard?.id,
-    title: state.selectedCard?.title,
-    description: state.selectedCard?.description,
-  });
+  const [formState, setFormState] = useState(state.card[state.selectedCard]);
 
-  // React.useEffect(() => {
-  //   setFormState(state.selectedCard);
-  // }, [state.selectedCard]);
+  React.useEffect(() => {}, [state]);
+
+  // ! working demo
+  React.useEffect(() => {
+    setFormState(state.cardInfo);
+  }, [state.cardInfo]);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(state.card);
-    dispatch({
-      type: "update_card",
-      payload: {
-        id: formState.id,
-        title: formState.title,
-        description: formState.description,
-      },
-    });
-    console.log(state.selectedCard);
   };
   const onChangeHandler = (e) => {
+    e.preventDefault();
+
     setFormState({ ...formState, [e.target.name]: e.target.value });
     dispatch({
       type: "update_card",
-      payload: {
-        id: formState.id,
-        title: formState.title,
-        description: formState.description,
-      },
+      payload: formState,
     });
-    console.log(state.selectedCard);
   };
 
   return (
@@ -60,16 +46,16 @@ export const EditCard = () => {
         onSubmit={onSubmitHandler}
       >
         <Heading>Edit Card</Heading>
-        <Input defaultValue={state.selectedCard?.id} readOnly />
+        <Input defaultValue={formState?.id} />
         <Input
-          defaultValue={state.selectedCard?.title}
+          defaultValue={formState?.title}
           name="title"
-          onChange={onChangeHandler}
+          onChange={(e) => onChangeHandler(e)}
         />
         <Input
-          defaultValue={state.selectedCard?.description}
+          defaultValue={formState?.description}
           name="description"
-          onChange={onChangeHandler}
+          onChange={(e) => onChangeHandler(e)}
         />
 
         <RadioGroup onChange={setValue} value={value}>

@@ -9,21 +9,28 @@ export function useData() {
 const initState = {
   card: [],
   selectedCard: null,
+  cardInfo: null,
+  count: 0,
 };
 const reducer = (state, action) => {
   switch (action.type) {
+    case "reload_data": {
+      return state;
+    }
     case "add_card": {
       const info = {
         id: nanoid(),
-        title: "demo",
-        description: "lorem ipsum dolor sit",
+        title: `demo card ${state.count}`,
+        description: `This is card ${state.count}`,
       };
-      return { ...state, card: [...state.card, info] };
+      return { ...state, card: [...state.card, info], count: state.count++ };
     }
+
     case "get_card_info": {
-      const data = action.payload;
-      return { ...state, selectedCard: Object.assign({}, data) };
+      const index = action.payload;
+      return { ...state, cardInfo: state.card[index], selectedCard: index };
     }
+
     case "add_new_card": {
       const selectedIndex = action.payload;
       const addAfter = (array, index, newItem) => {
@@ -31,37 +38,25 @@ const reducer = (state, action) => {
       };
       const newArray = addAfter(state.card, selectedIndex + 1, {
         id: nanoid(),
-        title: "demo",
-        description: "lorem ipsum dolor sit",
+        title: `demo card ${state.count}`,
+
+        description: `This is card ${state.count}`,
       });
       return {
         ...state,
         card: newArray,
+        count: state.count++,
       };
     }
+
     case "update_card": {
-      const newCard = state.card.map((card) =>
-        card.id === action.payload.id
-          ? {
-              ...card,
-              title: action.payload.title,
-              description: action.payload.description,
-            }
-          : card
-      );
+      let newArr = [...state.card];
+      newArr[state.selectedCard] = action.payload;
 
       return {
         ...state,
-        card: newCard,
+        card: newArr,
       };
-
-      // return {
-      //   ...state,
-      //   card: [
-      //     ...state.card.filter((el) => el.id !== action.payload.id),
-      //     action.payload,
-      //   ],
-      // };
     }
     default:
       return state;

@@ -7,6 +7,7 @@ import { AddButton } from "./Button";
 export const AddCard = () => {
   const { state, dispatch } = useData();
   React.useEffect(() => {}, [state]);
+
   return (
     <Flex flexDirection="column" w="400px" mx="auto" align="center" gridGap="3">
       {state.card.length > 0 ? null : (
@@ -20,12 +21,14 @@ export const AddCard = () => {
         color="#f5f5f5"
         className="animate__animated animate__backInLeft"
       >
-        {state.card?.map((card, index) => (
+        {state?.card.map((card, index) => (
           <Flex flexDirection="column" align="center" key={index}>
             <Card
-              onClick={() => dispatch({ type: "get_card_info", payload: card })}
-              title={card.title}
-              description={card.description}
+              onClick={() =>
+                dispatch({ type: "get_card_info", payload: index })
+              }
+              title={card?.title}
+              description={card?.description}
               bgColor="#1f1e1f"
             />
             <AddButton
