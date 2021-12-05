@@ -11,11 +11,11 @@ import { useData } from "./context/context";
 export const EditCard = () => {
   const { state, dispatch } = useData();
 
-  const [value, setValue] = useState("1");
-
   const [formState, setFormState] = useState(state.card[state.selectedCard]);
 
-  React.useEffect(() => {}, [state]);
+  React.useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   // ! working demo
   React.useEffect(() => {
@@ -26,7 +26,7 @@ export const EditCard = () => {
     e.preventDefault();
   };
   const onChangeHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     setFormState({ ...formState, [e.target.name]: e.target.value });
     dispatch({
@@ -46,31 +46,54 @@ export const EditCard = () => {
         onSubmit={onSubmitHandler}
       >
         <Heading>Edit Card</Heading>
-        <Input defaultValue={formState?.id} />
+        <Input defaultValue={formState?.id} readOnly />
         <Input
-          defaultValue={formState?.title}
+          focusBorderColor="lime"
+          value={formState?.title}
           name="title"
-          onChange={(e) => onChangeHandler(e)}
+          type="text"
+          onChange={onChangeHandler}
         />
         <Input
-          defaultValue={formState?.description}
+          focusBorderColor="lime"
+          type="text"
+          value={formState?.description}
           name="description"
-          onChange={(e) => onChangeHandler(e)}
+          onChange={onChangeHandler}
         />
 
-        <RadioGroup onChange={setValue} value={value}>
+        <RadioGroup>
           <Stack direction="row">
-            <Radio value="red" colorScheme="red">
+            <Radio
+              onChange={onChangeHandler}
+              value="red"
+              colorScheme="red"
+              name="bgColor"
+              checked={formState?.bgColor === "red"}
+            >
               Red
             </Radio>
-            <Radio value="blue" colorScheme="blue">
+            <Radio
+              onChange={onChangeHandler}
+              value="blue"
+              colorScheme="blue"
+              name="bgColor"
+              checked={formState?.bgColor === "blue"}
+            >
               Blue
             </Radio>
-            <Radio value="green" colorScheme="green">
+            <Radio
+              onChange={onChangeHandler}
+              value="green"
+              colorScheme="green"
+              name="bgColor"
+              checked={formState?.bgColor === "green"}
+            >
               Green
             </Radio>
           </Stack>
         </RadioGroup>
+
         {/* <Button type="submit">Save</Button> */}
       </Flex>
     </>

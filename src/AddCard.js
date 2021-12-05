@@ -29,7 +29,7 @@ export const AddCard = () => {
               }
               title={card?.title}
               description={card?.description}
-              bgColor="#1f1e1f"
+              bgColor={card?.bgColor}
             />
             <AddButton
               onClick={() => {

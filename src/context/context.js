@@ -22,6 +22,7 @@ const reducer = (state, action) => {
         id: nanoid(),
         title: `demo card ${state.count}`,
         description: `This is card ${state.count}`,
+        bgColor: "",
       };
       return { ...state, card: [...state.card, info], count: state.count++ };
     }
@@ -41,6 +42,7 @@ const reducer = (state, action) => {
         title: `demo card ${state.count}`,
 
         description: `This is card ${state.count}`,
+        bgColor: "",
       });
       return {
         ...state,
