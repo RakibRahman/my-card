@@ -7,11 +7,20 @@ import { AddButton } from "./Button";
 export const AddCard = () => {
   const { state, dispatch } = useData();
   React.useEffect(() => {}, [state]);
-
+  React.useEffect(() => {
+    console.log("Last Item:", state.lastCardInfo);
+  }, [state.card, state.lastCardInfo]);
+  React.useEffect(() => {}, [state.lastCardInfo]);
   return (
     <Flex flexDirection="column" w="400px" mx="auto" align="center" gridGap="3">
       {state.card.length > 0 ? null : (
-        <AddButton onClick={() => dispatch({ type: "add_card" })} />
+        <AddButton
+          onClick={() => {
+            dispatch({ type: "last_card_info" });
+
+            dispatch({ type: "add_card" });
+          }}
+        />
       )}
 
       <Flex
@@ -33,7 +42,8 @@ export const AddCard = () => {
             />
             <AddButton
               onClick={() => {
-                console.log("clicked", index);
+                console.log(state.cardInfo);
+                dispatch({ type: "last_card_info" });
                 dispatch({ type: "add_new_card", payload: index });
               }}
             />

@@ -20,6 +20,7 @@ export const Card = ({ title, description, bgColor, onClick }) => {
         cursor="pointer"
         mb="2"
         borderRadius="5"
+        // className="animate__animated animate__backInLeft"
       >
         <Heading> {title} </Heading>
         <Text> {description} </Text>
