@@ -11,9 +11,9 @@ import { colorStyle } from "./colorStyle";
 import { useData } from "./context/context";
 export const EditCard = () => {
   const { state, dispatch } = useData();
+
   const card =
     state.selectedCard !== null ? state.card[state.selectedCard] : null;
-
   const onChangeHandler = (e) => {
     const draftCard = { ...card, [e.target.name]: e.target.value };
     dispatch({

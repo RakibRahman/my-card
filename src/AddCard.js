@@ -9,7 +9,7 @@ export const AddCard = () => {
   const { state, dispatch } = useData();
   const { isOpen, onToggle } = useDisclosure();
   React.useEffect(() => {
-    console.log(state.selectedCard);
+    console.log("index:", state.selectedCard);
   }, [state]);
 
   return (
