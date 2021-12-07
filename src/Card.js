@@ -12,7 +12,10 @@ export const Card = ({ title, description, bgColor, onClick }) => {
       justify="center"
       align="center"
       onClick={onClick}
-      // className="animate__animated animate__backInLeft"
+      _hover={{
+        transition: "all 0.3s ease-in-out",
+        transform: "scale(1.02)",
+      }}
     >
       <Box
         boxShadow="25px 25px 50px #1b1c1b, -25px -25px 50px #2d302f"
@@ -22,7 +25,6 @@ export const Card = ({ title, description, bgColor, onClick }) => {
         cursor="pointer"
         mb="2"
         borderRadius="5"
-        // className="animate__animated animate__backInLeft"
       >
         <Heading> {title} </Heading>
         <Text> {description} </Text>
