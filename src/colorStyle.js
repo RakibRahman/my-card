@@ -1,5 +1,5 @@
 export const colorStyle = {
-  red: "#ff304f ",
+  red: "#ff304f",
   blue: "#28c7fa",
   green: "#0b8457",
 
