@@ -35,12 +35,13 @@ export const reducer = (state, action) => {
         return [...array.slice(0, index), newItem, ...array.slice(index)];
       };
 
-      const newArray = addAfter(state.card, selectedIndex + 1, {
+      const newArray = addAfter(state.card, selectedIndex, {
         id: nanoid(),
         title: `demo card ${state.count}`,
         description: `This is card ${state.count}`,
         bgColor: "#000000",
       });
+
       return {
         ...state,
         card: newArray,

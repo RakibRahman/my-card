@@ -7,6 +7,7 @@ import {
   RadioGroup,
   Stack,
 } from "@chakra-ui/react";
+import { colorStyle } from "./colorStyle";
 import { useData } from "./context/context";
 export const EditCard = () => {
   const { state, dispatch } = useData();
@@ -22,47 +23,52 @@ export const EditCard = () => {
   };
 
   return (
-    card && (
-      <Flex w="400px" color="#f5f5f5" flexDirection="column" gridGap="3">
-        <Heading>Edit Card</Heading>
+    <Flex flexDirection="column" color="#f5f5f5" justify="start" align="center">
+      <Heading>{state.card.length > 0 ? "Edit Card" : "Add New Card"}</Heading>
+      {card && (
+        <Flex w="400px" color="#f5f5f5" flexDirection="column" gridGap="3">
+          <Input
+            focusBorderColor="lime"
+            value={card?.title}
+            name="title"
+            type="text"
+            onChange={onChangeHandler}
+          />
+          <Input
+            focusBorderColor="lime"
+            type="text"
+            value={card?.description}
+            name="description"
+            onChange={onChangeHandler}
+          />
 
-        <Input
-          focusBorderColor="lime"
-          value={card?.title}
-          name="title"
-          type="text"
-          onChange={onChangeHandler}
-        />
-        <Input
-          focusBorderColor="lime"
-          type="text"
-          value={card?.description}
-          name="description"
-          onChange={onChangeHandler}
-        />
-
-        <RadioGroup name="bgColor">
-          <Stack direction="row">
-            <Radio onChange={onChangeHandler} value="#ff304f" colorScheme="red">
-              Red
-            </Radio>
-            <Radio
-              onChange={onChangeHandler}
-              value="#28c7fa"
-              colorScheme="blue"
-            >
-              Blue
-            </Radio>
-            <Radio
-              onChange={onChangeHandler}
-              value="#0b8457"
-              colorScheme="green"
-            >
-              Green
-            </Radio>
-          </Stack>
-        </RadioGroup>
-      </Flex>
-    )
+          <RadioGroup name="bgColor">
+            <Stack direction="row">
+              <Radio
+                onChange={onChangeHandler}
+                value={colorStyle.red}
+                colorScheme="red"
+              >
+                Red
+              </Radio>
+              <Radio
+                onChange={onChangeHandler}
+                value={colorStyle.blue}
+                colorScheme="blue"
+              >
+                Blue
+              </Radio>
+              <Radio
+                onChange={onChangeHandler}
+                value={colorStyle.green}
+                colorScheme="green"
+              >
+                Green
+              </Radio>
+            </Stack>
+          </RadioGroup>
+        </Flex>
+      )}
+    </Flex>
   );
 };
