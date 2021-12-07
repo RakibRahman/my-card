@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text, Flex, Heading } from "@chakra-ui/react";
-import { colorStyle } from "./colorStyle";
+import { colorStyle } from "../colorStyle";
 
 export const Card = ({ title, description, bgColor, onClick }) => {
   return (

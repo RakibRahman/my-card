@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Heading } from "@chakra-ui/react";
-import { Editor } from "./Editor";
-import { useData } from "./context/context";
+import { Editor } from "../components/Editor";
+import { useData } from "../context/context";
 export const EditCard = () => {
   const { state, dispatch } = useData();
 

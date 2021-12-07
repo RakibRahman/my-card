@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { AddCard } from "./AddCard";
-import { EditCard } from "./EditCard";
+import { AddCard } from "./components/AddCard";
+import { EditCard } from "./components/EditCard";
 import { DataProvider } from "./context/context";
 import "animate.css";
 function App() {

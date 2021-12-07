@@ -1,7 +1,6 @@
 import React from "react";
 import { Flex, ScaleFade, useDisclosure } from "@chakra-ui/react";
-
-import { useData } from "./context/context";
+import { useData } from "../context/context";
 import { Card } from "./Card";
 import { AddButton } from "./Button";
 

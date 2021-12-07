@@ -1,5 +1,5 @@
 import React from "react";
-import { colorStyle } from "./colorStyle";
+import { colorStyle } from "../colorStyle";
 import { Input, RadioGroup, Radio, Stack } from "@chakra-ui/react";
 export const Editor = ({ onChange, card }) => {
   return (
