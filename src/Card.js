@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Text, Flex, Heading } from "@chakra-ui/react";
-import { AddButton } from "./Button";
+
 import { useData } from "./context/context";
 export const Card = ({ title, description, bgColor, onClick }) => {
-  const { state, dispatch } = useData();
+  const { state } = useData();
+
+  React.useEffect(() => {}, [state]);
   return (
     <Flex
       flexDirection="column"
