@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Flex,
   Input,
@@ -10,79 +10,59 @@ import {
 import { useData } from "./context/context";
 export const EditCard = () => {
   const { state, dispatch } = useData();
+  const card =
+    state.selectedCard !== null ? state.card[state.selectedCard] : null;
 
-  // const [formState, setFormState] = useState(state.card[state.selectedCard]);
-  const [formState, setFormState] = useState(state.lastCardInfo);
-
-  React.useEffect(() => {}, [state]);
-  React.useEffect(() => {}, [state.lastCardInfo]);
-
-  // ! working demo
-  React.useEffect(() => {
-    setFormState(state.cardInfo);
-  }, [state.cardInfo]);
-
-  //! updating lastCardInfo
-  React.useEffect(() => {
-    setFormState(state.lastCardInfo);
-  }, [state.lastCardInfo]);
-
-  //! keeping eye on formState
-  React.useEffect(() => {
-    // console.log(formState);
-  }, [formState]);
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-  };
   const onChangeHandler = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    const draftCard = { ...card, [e.target.name]: e.target.value };
     dispatch({
       type: "update_card",
-      payload: formState,
+      payload: draftCard,
     });
   };
 
   return (
-    <Flex
-      as="form"
-      w="400px"
-      color="#f5f5f5"
-      flexDirection="column"
-      gridGap="3"
-      onSubmit={onSubmitHandler}
-    >
-      <Heading>Edit Card</Heading>
-      <Input defaultValue={formState?.id} readOnly />
-      <Input
-        focusBorderColor="lime"
-        value={formState?.title}
-        name="title"
-        type="text"
-        onChange={(e) => onChangeHandler(e)}
-      />
-      <Input
-        focusBorderColor="lime"
-        type="text"
-        value={formState?.description}
-        name="description"
-        onChange={onChangeHandler}
-      />
+    card && (
+      <Flex w="400px" color="#f5f5f5" flexDirection="column" gridGap="3">
+        <Heading>Edit Card</Heading>
 
-      <RadioGroup name="bgColor">
-        <Stack direction="row">
-          <Radio onChange={onChangeHandler} value="#ff304f" colorScheme="red">
-            Red
-          </Radio>
-          <Radio onChange={onChangeHandler} value="#28c7fa" colorScheme="blue">
-            Blue
-          </Radio>
-          <Radio onChange={onChangeHandler} value="#0b8457" colorScheme="green">
-            Green
-          </Radio>
-        </Stack>
-      </RadioGroup>
+        <Input
+          focusBorderColor="lime"
+          value={card?.title}
+          name="title"
+          type="text"
+          onChange={onChangeHandler}
+        />
+        <Input
+          focusBorderColor="lime"
+          type="text"
+          value={card?.description}
+          name="description"
+          onChange={onChangeHandler}
+        />
 
-      {/* <Button type="submit">Save</Button> */}
-    </Flex>
+        <RadioGroup name="bgColor">
+          <Stack direction="row">
+            <Radio onChange={onChangeHandler} value="#ff304f" colorScheme="red">
+              Red
+            </Radio>
+            <Radio
+              onChange={onChangeHandler}
+              value="#28c7fa"
+              colorScheme="blue"
+            >
+              Blue
+            </Radio>
+            <Radio
+              onChange={onChangeHandler}
+              value="#0b8457"
+              colorScheme="green"
+            >
+              Green
+            </Radio>
+          </Stack>
+        </RadioGroup>
+      </Flex>
+    )
   );
 };
