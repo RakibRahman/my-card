@@ -12,11 +12,9 @@ export const EditCard = () => {
   const { state, dispatch } = useData();
 
   // const [formState, setFormState] = useState(state.card[state.selectedCard]);
-  const [formState, setFormState] = useState(null);
+  const [formState, setFormState] = useState(state.lastCardInfo);
 
-  React.useEffect(() => {
-    // console.log(state.card);
-  }, [state]);
+  React.useEffect(() => {}, [state]);
   React.useEffect(() => {}, [state.lastCardInfo]);
 
   // ! working demo
@@ -26,15 +24,13 @@ export const EditCard = () => {
 
   //! updating lastCardInfo
   React.useEffect(() => {
-    // console.log("bgColor changed");
-    // console.log(state);
     setFormState(state.lastCardInfo);
   }, [state.lastCardInfo]);
 
   //! keeping eye on formState
   React.useEffect(() => {
-    console.log(formState);
-  }, [formState, state.lastCardInfo]);
+    // console.log(formState);
+  }, [formState]);
   const onSubmitHandler = (e) => {
     e.preventDefault();
   };
@@ -62,7 +58,7 @@ export const EditCard = () => {
         value={formState?.title}
         name="title"
         type="text"
-        onChange={onChangeHandler}
+        onChange={(e) => onChangeHandler(e)}
       />
       <Input
         focusBorderColor="lime"
